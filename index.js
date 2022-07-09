@@ -36,14 +36,14 @@
 // their new role and this information is updated in the database
 
 // const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
 const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'Salt&Burn67',
         database: 'employees'
     },
 
@@ -132,7 +132,7 @@ function addDept() {
         {
             type: 'input',
             name: 'title',
-            message: 'What department would tou like to add?'
+            message: 'What department would you like to add?'
         }
     ]
 
@@ -151,7 +151,7 @@ function addRole() {
         {
             type: 'input',
             name: 'title',
-            message: 'What role would tou like to add?'
+            message: 'What role would you like to add?'
         },
 
         {
@@ -164,6 +164,12 @@ function addRole() {
             type: 'input',
             name: 'deptId',
             message: 'What is the department ID for this role?'
+        },
+
+        {
+            type: 'input',
+            name: 'job_title',
+            message: 'What is the job title for this role?'
         }
     ]
 
@@ -200,7 +206,7 @@ function addEmployee() {
         {
             type: 'input',
             name: 'managerId',
-            message: 'What is the manager ID of this employee, if they are a manager?'
+            message: 'What is the manager ID of this employee, if they are a manager? If not, just enter 0'
         }
     ]
 
