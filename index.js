@@ -39,6 +39,8 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
+// const cTable = require('console.table');
+
 const db = mysql.createConnection(
     {
         host: 'localhost',
@@ -131,13 +133,13 @@ function addDept() {
     const deptQuestions = [
         {
             type: 'input',
-            name: 'title',
+            name: 'dept_name',
             message: 'What department would you like to add?'
         }
     ]
 
     inquirer.prompt(deptQuestions).then((answers) => {
-        const info = `INSERT INTO department (dept_name) VALUES('${answers.title}')`;
+        const info = `INSERT INTO` + department `(dept_name) VALUES('${answers.dept_name}')`;
         db.query(info, (err) => {
             if (err) {
                 console.log(err);
@@ -165,20 +167,14 @@ function addRole() {
             name: 'deptId',
             message: 'What is the department ID for this role?'
         },
-
-        {
-            type: 'input',
-            name: 'job_title',
-            message: 'What is the job title for this role?'
-        }
     ]
 
     inquirer.prompt(roleQuestions).then((answers) => {
-        const info = `INSERT INTO roles (job_title, salary, dept_id) VALUES('${answers.title}', '${answers.salary}', '${answers.deptId}')`;
-        db.query(info, (err) => {
+        const info = `INSERT INTO` + roles + `(title, salary, dept_id) VALUES('${answers.title}', '${answers.salary}', '${answers.deptId}')`;
+        db.query(info, (err, result) => {
             if (err) {
                 console.log(err);
-            }
+            } console.log(result);
         });
     });
 };
@@ -211,7 +207,7 @@ function addEmployee() {
     ]
 
     inquirer.prompt(employeeQuestions).then((answers) => {
-        const info = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES('${answers.firstname}', '${answers.lastname}', '${answers.roleId}', '${answers.managerId}')`;
+        const info = `INSERT INTO` + employee + `(first_name, last_name, role_id, manager_id) VALUES('${answers.firstname}', '${answers.lastname}', '${answers.roleId}', '${answers.managerId}')`;
         db.query(info, (err) => {
             if (err) {
                 console.log(err);
@@ -247,7 +243,7 @@ function updateEmployee() {
                     console.log(err);
                 }
                 const roleName = result.map(
-                    (roles) => `${roles.job_title}`
+                    (roles) => `${roles.title}`
                 );
 
                 const updateRoleQuestions = [

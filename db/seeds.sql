@@ -5,7 +5,7 @@ VALUES
     ('Marketing'),
     ('Booking')
 
-INSERT INTO roles (job_title, salary, dept_id)
+INSERT INTO roles (title, salary, dept_id)
 VALUES
     ('Owner', 750000, 1),
     ('Ops Manager', 60000, 2),

@@ -44,7 +44,7 @@ CREATE TABLE roles (
 -- the department that role belongs to, 
 -- and the salary for that role
 id INTEGER AUTO_INCREMENT PRIMARY KEY,
-job_title VARCHAR(30) UNIQUE NOT NULL,
+title VARCHAR(30) NOT NULL,
 salary INTEGER NOT NULL,
 dept_id INTEGER NOT NULL
 FOREIGN KEY (dept_id) REFERENCES department(id)
