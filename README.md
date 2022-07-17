@@ -18,7 +18,7 @@ Navigate back to your terminal and enter `mysql -u root -p` to enter the MySQL d
 ## <a id="application">Application</a>
 Here is the application in use:
 
-![EMPLOYEEdemo](https://user-images.githubusercontent.com/95983252/179425564-4b446693-1c38-4f54-a7f4-fef394697e57.gif)
+![employeedemo](https://user-images.githubusercontent.com/95983252/179425664-b35e1722-2d23-40cd-bfad-fcd0c33ccf61.gif)
 
 This application requires the following dependencies to run, which are already declared within the package.json file:
 
