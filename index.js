@@ -1,45 +1,7 @@
-// GIVEN a command-line application that accepts user input
-
-// WHEN I start the application
-// THEN I am presented with the following options: view all departments, 
-// view all roles, view all employees, 
-// add a department, add a role, add an employee, 
-// and update an employee role
-
-// WHEN I choose to view all departments
-// THEN I am presented with a formatted table showing 
-// department names and department ids
-
-// WHEN I choose to view all roles
-// THEN I am presented with the job title, role id, 
-// the department that role belongs to, and the salary for that role
-
-// WHEN I choose to view all employees
-// THEN I am presented with a formatted table showing employee data, 
-// including employee ids, first names, last names, job titles, departments, 
-// salaries, and managers that the employees report to
-
-// WHEN I choose to add a department
-// THEN I am prompted to enter the name of the department 
-// and that department is added to the database
-
-// WHEN I choose to add a role
-// THEN I am prompted to enter the name, salary, and department 
-// for the role and that role is added to the database
-
-// WHEN I choose to add an employee
-// THEN I am prompted to enter the employee’s first name, 
-// last name, role, and manager, and that employee is added to the database
-
-// WHEN I choose to update an employee role
-// THEN I am prompted to select an employee to update and 
-// their new role and this information is updated in the database
 
 // const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-
-// const cTable = require('console.table');
 
 const db = mysql.createConnection(
     {
@@ -133,13 +95,13 @@ function addDept() {
     const deptQuestions = [
         {
             type: 'input',
-            name: 'dept_name',
+            name: 'department_name',
             message: 'What department would you like to add?'
         }
     ]
 
     inquirer.prompt(deptQuestions).then((answers) => {
-        const info = `INSERT INTO` + department `(dept_name) VALUES('${answers.dept_name}')`;
+        const info = `INSERT INTO department (name) VALUES('${answers.title}')`;
         db.query(info, (err) => {
             if (err) {
                 console.log(err);
@@ -164,13 +126,13 @@ function addRole() {
 
         {
             type: 'input',
-            name: 'deptId',
+            name: 'department_id',
             message: 'What is the department ID for this role?'
         },
     ]
 
     inquirer.prompt(roleQuestions).then((answers) => {
-        const info = `INSERT INTO` + roles + `(title, salary, dept_id) VALUES('${answers.title}', '${answers.salary}', '${answers.deptId}')`;
+        const info = `INSERT INTO roles (title, salary, department_id) VALUES('${answers.title}', '${answers.salary}', '${answers.department_id}')`;
         db.query(info, (err, result) => {
             if (err) {
                 console.log(err);
@@ -183,31 +145,31 @@ function addEmployee() {
     const employeeQuestions = [
         {
             type: 'input',
-            name: 'firstname',
+            name: 'first_name',
             message: 'What is the first name of this employee?'
         },
 
         {
             type: 'input',
-            name: 'lastname',
+            name: 'last_name',
             message: 'What is the last name of this employee?'
         },
 
         {
             type: 'input',
-            name: 'roleId',
+            name: 'roles_id',
             message: 'What is the employee role ID?'
         },
 
         {
             type: 'input',
-            name: 'managerId',
+            name: 'manager_id',
             message: 'What is the manager ID of this employee, if they are a manager? If not, just enter 0'
         }
     ]
 
     inquirer.prompt(employeeQuestions).then((answers) => {
-        const info = `INSERT INTO` + employee + `(first_name, last_name, role_id, manager_id) VALUES('${answers.firstname}', '${answers.lastname}', '${answers.roleId}', '${answers.managerId}')`;
+        const info = `INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES('${answers.first_name}', '${answers.last_name}', '${answers.roles_id}', '${answers.manager_id}')`;
         db.query(info, (err) => {
             if (err) {
                 console.log(err);
