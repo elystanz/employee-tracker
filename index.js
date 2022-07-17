@@ -101,11 +101,13 @@ function addDept() {
     ]
 
     inquirer.prompt(deptQuestions).then((answers) => {
-        const info = `INSERT INTO department (name) VALUES('${answers.title}')`;
-        db.query(info, (err) => {
+        const info = `INSERT INTO department (name) VALUES('${answers.department_name}')`;
+        db.query(info, (err, result) => {
             if (err) {
                 console.log(err);
             }
+            console.table(result);
+            beginTracker();
         });
     });
 };
@@ -136,7 +138,9 @@ function addRole() {
         db.query(info, (err, result) => {
             if (err) {
                 console.log(err);
-            } console.log(result);
+            } 
+            console.log(result);
+            beginTracker();
         });
     });
 };
@@ -170,10 +174,12 @@ function addEmployee() {
 
     inquirer.prompt(employeeQuestions).then((answers) => {
         const info = `INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES('${answers.first_name}', '${answers.last_name}', '${answers.roles_id}', '${answers.manager_id}')`;
-        db.query(info, (err) => {
+        db.query(info, (err, res) => {
             if (err) {
                 console.log(err);
             }
+            console.log(res);
+            beginTracker();
         });
     });
 };
